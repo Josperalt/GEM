@@ -1,0 +1,308 @@
+\documentclass{article}
+%\documentclass[border=5mm]{standalone}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+%\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{tikz}
+\usetikzlibrary{mindmap}
+\usepackage{hyperref}
+\usepackage{graphics}
+\usepackage{listings}
+\usepackage[svgnames]{xcolor} % Carga xcolor con la opción svgnames
+\usepackage{verbatim}
+\usepackage{empheq}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   % Ahora debería funcionar
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,          
+    showtabs=false,                  
+    tabsize=2
+}
+\lstset{style=mystyle}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+\title{Electromagnetismo I: Guía de Estudio}
+\author{Bard}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+% ... (Capítulos 1 y 2 que ya hemos desarrollado) ...
+
+\newpage
+
+
+
+
+\begin{tikzpicture}[
+  mindmap,
+  grow cyclic, % Crecimiento cíclico para el mapa mental
+  every node/.style={concept}, % Estilo para todos los nodos concepto
+  concept color=blue!40, % Color base para los nodos
+  level 1/.append style={level distance=5cm, sibling angle=72}, % Ajustes para el primer nivel
+  level 2/.append style={level distance=3cm, sibling angle=55}, % Ajustes para el segundo nivel
+  ]
+
+  \node[concept] {Ley de Coulomb y el Campo Eléctrico} % Nodo raíz
+    child { node {Introducción} }
+    child { node {Carga y Densidad de Carga} }
+    child { node {Ley de Coulomb} }
+    child { node {Intensidad de Campo Eléctrico}
+        child { node {Campo Eléctrico de Cargas Puntuales} }
+        child { node {Campo Eléctrico de Distribución de Cargas} }
+    }
+    child { node {Densidad de Flujo Eléctrico y Flujo Eléctrico} };
+\end{tikzpicture}
+
+
+\section*{\underline{Módulo 3. Ley de Coulomb y el Campo Eléctrico}}
+
+\subsection*{3.1 Introducción}
+
+En este módulo, nos adentraremos en el estudio de la fuerza electrostática y el concepto de campo eléctrico. Comenzaremos con una revisión de la naturaleza de la carga eléctrica y sus diferentes formas de presentarse. Luego, introduciremos la Ley de Coulomb, que describe la interacción entre cargas puntuales. A partir de esta ley, definiremos la intensidad del campo eléctrico y exploraremos cómo calcularlo para diferentes distribuciones de carga. Finalmente, introduciremos los conceptos de flujo eléctrico y densidad de flujo eléctrico, que serán fundamentales para el desarrollo de la Ley de Gauss en el siguiente módulo.
+
+\subsection*{3.2 Carga y Densidad de Carga}
+
+La carga eléctrica es una propiedad fundamental de la materia. Existen dos tipos de carga: positiva y negativa. Cargas del mismo signo se repelen, mientras que cargas de signo opuesto se atraen. La unidad de carga en el Sistema Internacional (SI) es el Coulomb (C).
+
+La carga puede presentarse de forma discreta, como en el caso de cargas puntuales, o de forma continua, como una distribución de carga en un volumen, superficie o línea. Para describir estas distribuciones, se definen las siguientes densidades de carga:
+
+
+    % ... (Preámbulo: \documentclass, paquetes, etc.  Ver código completo abajo) ...
+
+\section*{\underline{Módulo 3. Ley de Coulomb y el Campo Eléctrico}}
+
+\subsection*{3.1 Introducción}
+
+En los dos capítulos anteriores, analizamos con cierto detalle las matemáticas del electromagnetismo: álgebra vectorial y cálculo vectorial. Ahora estamos listos para comenzar a analizar los fenómenos físicos del electromagnetismo. Será útil tener lo siguiente en mente: el estudio del electromagnetismo es el estudio de los fenómenos naturales. Hay dos razones por las que es importante enfatizar el electromagnetismo como ciencia aplicada. Primero, demuestra que es una ciencia útil y su estudio conduce a la comprensión de la naturaleza y, quizás lo más importante desde el punto de vista de la ingeniería, a la comprensión de la aplicación del electromagnetismo a diseños prácticos y útiles. Segundo, \textbf{todos los aspectos del electromagnetismo se basan en observaciones experimentales}. Todas las leyes del electromagnetismo se obtuvieron mediante mediciones cuidadosas que luego se expresaron en formas de leyes simples. Se supone que estas leyes son correctas simplemente porque no hay evidencia de lo contrario.
+Este aspecto de las leyes del electromagnetismo no debería molestarnos demasiado. Aunque no podemos afirmar una prueba absoluta de la corrección de las leyes, la experimentación ha demostrado que son correctas y las consideraremos como tales.
+En el proceso de aprendizaje, haremos un uso considerable de las herramientas matemáticas descritas en los capítulos 1 y 2. Es fácil olvidar que el propósito final es el diseño físico de los medios de enlace; sin embargo, cada relación y cada ecuación implica alguna cantidad física o propiedad de los campos involucrados.
+Como en el estudio de cualquier rama de la ciencia, debemos comenzar con los conceptos básicos y proceder de manera lógica. Comenzaremos con el estudio de los campos electrostáticos. Para ello, necesitamos algunas suposiciones que se pueden verificar fácilmente mediante experimentos. De hecho, la suposición básica es la existencia de cargas eléctricas positivas y negativas (electrones y protones). Una vez que se tiene en cuenta su existencia, podemos medir las fuerzas entre cargas, y estas fuerzas conducirán a la definición del campo eléctrico.
+Por lo tanto, \textbf{el campo eléctrico es simplemente una manifestación de fuerzas sobre cargas}. Incluso podemos llamarlo un campo de fuerza eléctrico. Estas fuerzas son fuerzas reales y son medibles.
+El campo eléctrico estático es un fenómeno sumamente útil que impregna nuestras vidas. La cantidad de aplicaciones y efectos que dependen de la electrostática es enorme. Desde los condensadores más simples hasta las tormentas eléctricas, y desde la deposición de papel de lija hasta las impresoras láser y los chips de memoria, el uso de campos estáticos es la base del diseño del dispositivo o de la explicación de los efectos involucrados. Por lo tanto, intentaremos hacer dos cosas: una es enunciar y explicar las leyes. Esto requerirá una exposición matemática de las relaciones entre fuerzas y cargas, basada en resultados experimentales. Al mismo tiempo, discutiremos al menos una muestra de aplicaciones de los campos electrostáticos.
+
+\subsection*{3.2 Carga y Densidad de Carga}
+
+La carga eléctrica es una propiedad fundamental de la materia. La carga del electrón se considera como la unidad de carga más pequeña y todas las cargas deben ser múltiplos de esta cantidad, aunque la carga puede ser positiva o negativa. La carga puede estar distribuida en el espacio o puede estar concentrada en un volumen pequeño o un "punto".
+\textbf{Carga puntual}: Una carga que ocupa un volumen en el espacio puede considerarse una carga puntual para fines de análisis si este volumen es pequeño en comparación con las dimensiones circundantes. Las cargas de electrones o protones a menudo se asumen como cargas puntuales. Para fines prácticos, otras cargas como la carga de una esfera a menudo se consideran cargas puntuales, siempre que estemos lejos de la esfera.
+Existen dos tipos de carga: positiva y negativa. Cargas del mismo signo se repelen, mientras que cargas de signo opuesto se atraen. La unidad de carga en el Sistema Internacional (SI) es el Coulomb (C).
+
+La carga puede presentarse de forma discreta, como en el caso de cargas puntuales, o de forma continua, como una distribución de carga en un volumen, superficie o línea. Para describir estas distribuciones, se definen las siguientes densidades de carga:
+
+\begin{itemize}
+    \item \textbf{Densidad volumétrica de carga ($\rho_v$):} Representa la cantidad de carga por unidad de volumen. Se define como:
+    
+    $$\rho_v = \lim_{\Delta V \to 0} \frac{\Delta Q}{\Delta V} \quad [C/m^3]$$
+    
+    \item \textbf{Densidad superficial de carga ($\rho_s$):} Representa la cantidad de carga por unidad de área. Se define como:
+    
+    $$\rho_s = \lim_{\Delta S \to 0} \frac{\Delta Q}{\Delta S} \quad [C/m^2]$$
+    
+    \item \textbf{Densidad lineal de carga ($\rho_l$):} Representa la cantidad de carga por unidad de longitud. Se define como:
+    
+    $$\rho_l = \lim_{\Delta l \to 0} \frac{\Delta Q}{\Delta l} \quad [C/m]$$
+\end{itemize}
+
+
+\subsubsection*{Ejemplo: Distribución de Carga No Uniforme en un Cilindro}
+
+Consideremos un cilindro de radio $R$ y longitud $L$ con una densidad de carga volumétrica no uniforme dada por:
+
+$$\rho_v(r) = \rho_0 \left(1 - \frac{r}{R}\right)$$
+
+donde $\rho_0$ es una constante positiva y $r$ es la distancia radial desde el eje del cilindro.
+
+\textbf{1. Calcular la carga total del cilindro.}
+
+Para calcular la carga total, integramos la densidad de carga sobre el volumen del cilindro. Usando coordenadas cilíndricas, el elemento de volumen es $dV = r dr d\phi dz$. Los límites de integración son:
+
+   $0 \le r \le R$, 
+   $0 \le \phi \le 2\pi$,
+   $0 \le z \le L$
+
+La carga total $Q$ es:
+
+$$Q = \int_V \rho_v(r) dV = \int_0^L \int_0^{2\pi} \int_0^R \rho_0 \left(1 - \frac{r}{R}\right) r dr d\phi dz$$
+
+Resolviendo la integral:
+
+$$Q = \rho_0 \int_0^L \int_0^{2\pi} \int_0^R \left(r - \frac{r^2}{R}\right) dr d\phi dz$$
+$$Q = \rho_0 \int_0^L \int_0^{2\pi} \left[\frac{r^2}{2} - \frac{r^3}{3R}\right]_0^R d\phi dz$$
+$$Q = \rho_0 \int_0^L \int_0^{2\pi} \left(\frac{R^2}{2} - \frac{R^2}{3}\right) d\phi dz$$
+$$Q = \rho_0 \int_0^L \int_0^{2\pi} \frac{R^2}{6} d\phi dz$$
+$$Q = \rho_0 \frac{R^2}{6} \int_0^L \int_0^{2\pi} d\phi dz$$
+$$Q = \rho_0 \frac{R^2}{6} (2\pi) \int_0^L dz$$
+$$Q = \rho_0 \frac{R^2}{6} (2\pi) [z]_0^L$$
+$$Q = \rho_0 \frac{R^2}{6} (2\pi) L$$
+$$Q = \frac{\pi \rho_0 R^2 L}{3}$$
+
+\textbf{2. Encontrar la densidad de carga superficial en la superficie lateral del cilindro (r=R).}
+
+En este caso, como la densidad de carga es volumétrica, no hay una densidad superficial de carga \textbf{definida} en la superficie lateral. Sin embargo, podemos considerar la cantidad de carga por unidad de área en la superficie lateral si imaginamos una capa infinitesimalmente delgada en $r=R$. Para esto, evaluamos la densidad volumétrica en $r=R$:
+
+$$\rho_v(R) = \rho_0 \left(1 - \frac{R}{R}\right) = 0$$
+
+Como la densidad volumétrica es cero en $r=R$, la densidad de carga superficial en la superficie lateral también sería cero. Si se quiere considerar la carga en una capa delgada de espesor $\Delta r$ cerca de la superficie, se podría calcular como:
+
+$$ \Delta Q \approx \rho_v(R-\Delta r/2) \cdot (2\pi R L) \cdot \Delta r $$
+
+Donde $(2\pi R L)$ es el área lateral del cilindro, y luego obtener una densidad superficial equivalente dividiendo por el área.
+
+\textbf{3. Encontrar la densidad de carga lineal a lo largo del eje del cilindro (r=0).}
+
+Similar al caso anterior, no hay una densidad lineal de carga \textbf{definida} en el eje, ya que la carga está distribuida en el volumen. Sin embargo, podemos evaluar la densidad volumétrica en $r=0$:
+
+$$\rho_v(0) = \rho_0 \left(1 - \frac{0}{R}\right) = \rho_0$$
+
+La densidad volumétrica en el eje es $\rho_0$. Si se considera una sección del cilindro de longitud $\Delta z$ y radio pequeño $\Delta r$ alrededor del eje, se podría calcular la carga en esa sección como:
+
+$$\Delta Q \approx \rho_v(0) \cdot (\pi (\Delta r)^2) \cdot \Delta z $$
+
+Y obtener una densidad lineal equivalente dividiendo por la longitud $\Delta z$.
+
+\textbf{Conclusión:}
+
+Este ejemplo ilustra cómo una distribución de carga no uniforme puede ser descrita mediante una función de densidad de carga. La carga total se obtiene integrando la densidad de carga sobre el volumen. En casos donde la densidad de carga es volumétrica, las densidades superficiales o lineales en puntos específicos no están estrictamente definidas, pero se pueden hacer consideraciones sobre capas o secciones para obtener valores equivalentes.
+\subsection*{3.3 Ley de Coulomb}
+
+La Ley de Coulomb establece que la fuerza electrostática entre dos cargas puntuales es directamente proporcional al producto de las magnitudes de las cargas e inversamente proporcional al cuadrado de la distancia entre ellas. La fuerza actúa a lo largo de la línea que une las dos cargas.
+
+Matemáticamente, la Ley de Coulomb se expresa como:
+\[
+\boxed{\mathbf{F} = \frac{1}{4\pi\epsilon_0} \frac{Q_1 Q_2}{r^2} \mathbf{\hat{R}} \quad [N]}
+\]
+Donde:
+
+\begin{itemize}
+    \item $\mathbf{F}$ es la fuerza electrostática entre las cargas $[N]$.
+    \item $Q_1$ y $Q_2$ son las magnitudes de las cargas puntuales $[C]$.
+    \item $R$ es la distancia entre las cargas $[m]$.
+    \item $\mathbf{\hat{R}}$ es un vector unitario que apunta en la dirección de la línea que une las dos cargas.
+    \item $\epsilon_0$ es la permitividad del vacío, una constante con valor aproximado de $8.854 \times 10^{-12}$[C$^2$/Nm$^2] $.
+\end{itemize}
+
+\textbf{Nota}: En este capítulo, utilizaremos las unidades C$^2$/Nm$^2$ para la permitividad del vacío ($\epsilon_0$) por conveniencia en la presentación de las ecuaciones. En capítulos posteriores, se utilizará la unidad equivalente Faradios por metro (F/m).
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{fuerzas_carga.pdf}
+    \caption{Fuerzas entre cargas puntuales: (a) Dos cargas positivas, (b) Dos cargas negativas, (c) Una carga positiva y una negativa.}
+    \label{fig:fuerzas_cargas}
+\end{figure}
+
+
+\subsection*{3.4 Intensidad de Campo Eléctrico}
+
+La intensidad de campo eléctrico, o simplemente campo eléctrico, en un punto del espacio se define como la fuerza electrostática por unidad de carga que experimentaría una carga de prueba positiva colocada en dicho punto.
+
+$$\mathbf{E} = \frac{\mathbf{F}}{q_0}$$
+
+Donde:
+
+\begin{itemize}
+    \item $\mathbf{E}$ es el campo eléctrico.
+    \item $\mathbf{F}$ es la fuerza electrostática sobre la carga de prueba.
+    \item $q_0$ es la magnitud de la carga de prueba.
+\end{itemize}
+
+La unidad del campo eléctrico en el SI es el Newton por Coulomb (N/C), que también es equivalente al Volt por metro (V/m).
+
+\subsubsection*{3.4.1 Campo Eléctrico de Cargas Puntuales}
+
+El campo eléctrico generado por una carga puntual $q$ a una distancia $r$ de la carga viene dado por:
+
+$$\mathbf{E} = \frac{1}{4\pi\epsilon_0} \frac{q}{r^2} \mathbf{\hat{r}}$$
+
+Donde:
+
+\begin{itemize}
+    \item $\mathbf{E}$ es el campo eléctrico.
+    \item $q$ es la magnitud de la carga puntual.
+    \item $r$ es la distancia desde la carga al punto donde se evalúa el campo.
+    \item $\mathbf{\hat{r}}$ es un vector unitario que apunta desde la carga hacia el punto donde se evalúa el campo.
+    \item $\epsilon_0$ es la permitividad del vacío.
+\end{itemize}
+
+\subsubsection*{3.4.2 Campo Eléctrico de Distribución de Cargas}
+
+Para calcular el campo eléctrico debido a una distribución continua de carga, se divide la distribución en elementos infinitesimales de carga $dq$ y se calcula el campo eléctrico producido por cada elemento como si fuera una carga puntual. Luego, se suman (integran) las contribuciones de todos los elementos para obtener el campo eléctrico total.
+
+Dependiendo de la geometría de la distribución de carga, se utilizará la integral correspondiente:
+
+\begin{itemize}
+    \item \textbf{Distribución volumétrica:}
+    
+    $$\mathbf{E} = \frac{1}{4\pi\epsilon_0} \int_V \frac{\rho}{r^2} \mathbf{\hat{r}} dV$$
+    
+    \item \textbf{Distribución superficial:}
+    
+    $$\mathbf{E} = \frac{1}{4\pi\epsilon_0} \int_S \frac{\sigma}{r^2} \mathbf{\hat{r}} dS$$
+    
+    \item \textbf{Distribución lineal:}
+    
+    $$\mathbf{E} = \frac{1}{4\pi\epsilon_0} \int_l \frac{\lambda}{r^2} \mathbf{\hat{r}} dl$$
+\end{itemize}
+
+En estas expresiones, $\mathbf{\hat{r}}$ es el vector unitario que apunta desde el elemento de carga $dq$ hasta el punto donde se evalúa el campo eléctrico, y $r$ es la distancia entre el elemento de carga y el punto.
+
+\subsection*{3.5 Densidad de Flujo Eléctrico y Flujo Eléctrico}
+
+El flujo eléctrico $\Phi_E$ a través de una superficie se define como la integral del campo eléctrico sobre dicha superficie. Intuitivamente, representa el número de líneas de campo eléctrico que atraviesan la superficie.
+
+$$\Phi_E = \int_S \mathbf{E} \cdot d\mathbf{S}$$
+
+Donde:
+
+\begin{itemize}
+    \item $\Phi_E$ es el flujo eléctrico.
+    \item $\mathbf{E}$ es el campo eléctrico.
+    \item $d\mathbf{S}$ es un vector infinitesimal de área, perpendicular a la superficie y con magnitud igual al área del elemento infinitesimal.
+\end{itemize}
+
+La densidad de flujo eléctrico $\mathbf{D}$ se define como:
+
+$$\mathbf{D} = \epsilon_0 \mathbf{E}$$
+
+En un medio material, la densidad de flujo eléctrico se relaciona con el campo eléctrico a través de la permitividad del medio $\epsilon$:
+
+$$\mathbf{D} = \epsilon \mathbf{E}$$
+
+La unidad de la densidad de flujo eléctrico en el SI es el Coulomb por metro cuadrado (C/m$^2$).
+
+El flujo eléctrico también puede expresarse en términos de la densidad de flujo eléctrico:
+
+$$\Phi_E = \int_S \mathbf{D} \cdot d\mathbf{S}$$
+
+Este será el punto de partida para introducir la Ley de Gauss en el siguiente módulo.
+
+% ... (Resto del documento: Cierre del documento) ...
+
+
+
+\end{document}
